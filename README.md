@@ -37,7 +37,32 @@ To get highlight-reel up and running, follow these simple steps:
 
 ## Usage
 
-After starting the application, you can navigate to `http://localhost:5000` in your web browser. From there, you can upload MP4 videos, assign tags to them, and use these tags for searching through your video collection.
+### Before you start:
+
+1. Update variables:
+* Locate the lines where `MEDIA_FOLDER` and `VIDEO_METADATA_FILE` are defined near the beginning of `app.py`.
+
+* Change the values within the quotes to match the desired paths on your system. For example:
+
+```Python
+MEDIA_FOLDER = '/path/to/your/media/folder'  # Replace with your actual path
+app.config['MEDIA_FOLDER'] = MEDIA_FOLDER
+
+VIDEO_METADATA_FILE = '/path/to/your/video_metadata.yaml'  # Replace with your actual path
+app.config['VIDEO_METADATA_FILE'] = VIDEO_METADATA_FILE
+```
+
+### Starting the application:
+
+Run `python app.py`
+
+### Using the application:
+
+* Once the application is running, open your web browser and go to http://localhost:5000.
+* You can now:
+    * Upload MP4 videos.
+    * Assign tags to videos.
+    * Search for videos using tags.
 
 ## Inspiration for the Repository Name: "highlight-reel"
 
