@@ -10,8 +10,37 @@ app = Flask(__name__)
 sess = Session()
 
 # Allowed video extensions
-# ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'flv'}
-ALLOWED_EXTENSIONS = {'mp4'}
+# Video File Types
+# MP4: .mp4 - Widely supported, contains MPEG-4 or H.264 video and AAC audio.
+# WebM: .webm - Open format, often contains VP8 or VP9 video and Vorbis or Opus audio.
+# Ogg: .ogg - Open format, may contain Theora video and Vorbis audio.
+
+# Audio File Types
+# MP3: .mp3 - Widely used for music, podcasts, etc.
+# WAV: .wav - Uncompressed audio format, high quality.
+# AAC: .aac - Advanced Audio Coding, similar to MP3 but higher quality.
+# Ogg (Vorbis): .ogg - Audio counterpart of the Ogg video format.
+# FLAC: .flac - Free Lossless Audio Codec, for lossless audio compression.
+
+# Image File Types
+# JPEG: .jpeg/.jpg - Common for photos, uses lossy compression.
+# PNG: .png - Supports transparency, uses lossless compression.
+# GIF: .gif - Supports animation, uses lossless compression.
+# WebP: .webp - Modern format, supports both lossy and lossless compression.
+# SVG: .svg - Scalable Vector Graphics, for vector-based images.
+
+ALLOWED_EXTENSIONS = {
+    # Video File Types
+    "mp4", "webm", "ogg", 
+
+    # Audio File Types
+    "mp3", "wav", "aac", "ogg", "flac", 
+
+    # Image File Types
+    "jpeg", "jpg", "png", "gif", "webp", "svg"
+}
+
+
 
 # Media directory configuration
 MEDIA_FOLDER = '/media/wd/01/daytrading-videos'  # Set your path here
@@ -52,12 +81,14 @@ def add_video():
             return redirect(request.url)
         file = request.files['video_file']
 
+        print("uno\n")
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
             flash('No selected video file')
             return redirect(request.url)
 
+        print("dos\n")
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             upload_date = datetime.datetime.now()
@@ -80,7 +111,8 @@ def add_video():
             videos = load_videos()  # Load current videos
             videos.append(Video(title, url, description, tags, date_saved))
             save_videos(videos)  # Save updated videos list
- 
+
+            print("tres\n")
             return redirect(url_for('index'))
 
     return render_template('add_video.html')

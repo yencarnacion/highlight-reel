@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Add a New Video</h1>
-  {% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class="flashes">
     {% for message in messages %}
@@ -19,8 +19,13 @@
 
         <p>Title: <input type="text" name="title"></p>
         <p>Description: <textarea name="description"></textarea></p>
-        <p>Tags: <input type="text" name="tags" placeholder="Separate tags with spaces"></p>
-	<p>Video: <input type="file" name="video_file" accept="video/*"></p>
+        <p>Tags: <input type="text" name="tags" placeholder="Separate tags with spaces"></p>	
+	<p>Video: 
+	  <input 
+	    type="file" 
+	    name="video_file" 
+	    accept=".mp4,.webm,.ogg,.mp3,.wav,.aac,.flac,.jpeg,.jpg,.png,.gif,.webp,.svg">
+	</p>
         <p><input type="submit" value="Add Video"></p>
 	
     </form>
