@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Video</title>
+</head>
+<body>
+  <h1>Add a New Video</h1>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <form action="/add" method="post" enctype="multipart/form-data">
+
+        <p>Title: <input type="text" name="title"></p>
+        <p>Description: <textarea name="description"></textarea></p>
+        <p>Tags: <input type="text" name="tags" placeholder="Separate tags with spaces"></p>
+	<p>Video: <input type="file" name="video_file" accept="video/*"></p>
+        <p><input type="submit" value="Add Video"></p>
+	
+    </form>
+    <a href="/">Back to Home</a>
+
+</body>
+</html>
