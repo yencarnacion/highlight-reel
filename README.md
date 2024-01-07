@@ -1,6 +1,6 @@
 # highlight-reel
 
-highlight-reel is a Python project designed to facilitate the uploading and tagging of MP4 videos. This platform allows users to efficiently manage and search through their video collections using custom tags. Each video record can be uniquely tagged during the upload process, making it easier to locate and organize video content.
+highlight-reel is a Python project designed to facilitate the uploading and tagging of MP4 videos. It is a simple video database. This platform allows users to efficiently manage and search through their video collections using custom tags. Each video record can be uniquely tagged during the upload process, making it easier to locate and organize video content.
 
 ## Getting Started
 
