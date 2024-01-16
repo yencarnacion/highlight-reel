@@ -108,9 +108,14 @@ def add_video():
             date_saved = upload_date.strftime("%Y.%m.%d %H:%M:%S")
             url = url_for('uploaded_file', filename=os.path.join(year_month, filename))
 
-            videos = load_videos()  # Load current videos
-            videos.append(Video(title, url, description, tags, date_saved))
-            save_videos(videos)  # Save updated videos list
+            # Load current videos
+            videos = load_videos()  
+
+            # Insert new video at the top
+            videos.insert(0, Video(title, url, description, tags, date_saved))  
+
+            # Save updated videos list
+            save_videos(videos)  
 
             print("tres\n")
             return redirect(url_for('index'))
