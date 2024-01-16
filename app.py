@@ -55,7 +55,9 @@ def load_videos():
         return []
     with open(app.config['VIDEO_METADATA_FILE'], 'r') as file:
         videos_dict = yaml.safe_load(file) or []
-    return [Video(**video) for video in videos_dict]
+    videos = [Video(**video, index=i) for i, video in enumerate(videos_dict)]
+    return videos
+
 
 def save_videos(videos):
     videos_dict = [video.to_dict() for video in videos]
@@ -69,7 +71,9 @@ def allowed_file(filename):
 @app.route('/')
 def index():
     videos = load_videos()  # Load current videos
-    return render_template('index.html', videos=videos)
+    videos_with_index = [(video, video.index) for video in videos]
+
+    return render_template('index.html', videos=videos_with_index)
 
 # Route to add a new video
 @app.route('/add', methods=['GET', 'POST'])
@@ -152,7 +156,7 @@ def delete_video(video_index):
 def search():
     search_tags = request.args.get('tags', '').split()
     videos = load_videos()  # Load current videos
-    filtered_videos = [video for video in videos if all(tag in video.tags for tag in search_tags)]
+    filtered_videos = [(video, video.index) for video in videos if all(tag in video.tags for tag in search_tags)]
     return render_template('index.html', videos=filtered_videos)
 
 @app.route('/uploads/<path:filename>')
@@ -160,12 +164,13 @@ def uploaded_file(filename):
     return send_from_directory(app.config['MEDIA_FOLDER'], filename)
 
 class Video:
-    def __init__(self, title, url, description, tags, date_saved):
+    def __init__(self, title, url, description, tags, date_saved, index=None):
         self.title = title
         self.url = url
         self.description = description
         self.tags = tags
         self.date_saved = date_saved
+        self.index = index
 
     def to_dict(self):
         print("to_dict called")  # Debug print

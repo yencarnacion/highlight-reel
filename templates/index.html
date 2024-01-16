@@ -12,15 +12,15 @@
         <input type="submit" value="Search">
     </form>
     <hr>
-    {% for video in videos %}
+    {% for video, index in videos %}
     <div>
         <h2>{{ video.title }}</h2>
         <p><a href="{{ video.url }}">{{ video.url }}</a></p>
         <p>{{ video.description }}</p>
         <p>Tags: {{ video.tags | join(' ') }}</p>
         <p>Date Saved: {{ video.date_saved }}</p>
-        <a href="/update/{{ loop.index0 }}">Edit</a>
-        <form action="/delete/{{ loop.index0 }}" method="post" style="display: inline;">
+        <a href="/update/{{ video.index }}">Edit</a>
+        <form action="/delete/{{ video.index }}" method="post" style="display: inline;">
             <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this video?');">
         </form>
     </div>
